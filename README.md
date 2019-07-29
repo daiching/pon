@@ -13,7 +13,8 @@ func main() {
 			Id   int    `json:"id"`
 			Name string `json:"name"`
 		}
-		s := Sample{1, "GET"}
+		s.Id = 1
+		s.Name = "GET"
 
 		// return status code and interface{}
 		return s, pon.StatusOK
