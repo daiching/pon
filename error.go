@@ -12,6 +12,14 @@ type ErrorResponse struct {
 	errorMessage string `json:"errorMessage"`
 }
 
+func (e *ErrorResponse) SetStatus(sts int) {
+	e.status = sts
+}
+
+func (e *ErrorResponse) SetErrorMessage(em string) {
+	e.errorMessage = em
+}
+
 func NewErrorResponse(err string, sts int) ErrorResponse {
 	res := ErrorResponse{
 		StatusBadRequest,
@@ -48,14 +56,6 @@ func NewErrorResponseJsonAndStatus(err string, sts int) (string, int) {
 	res, sts := NewErrorResponseAndStatus(err, sts)
 	b, _ := json.Marshal(res)
 	return string(b), sts
-}
-
-func (e *ErrorResponse) SetStatus(sts int) {
-	e.status = sts
-}
-
-func (e *ErrorResponse) SetErrorMessage(em string) {
-	e.errorMessage = em
 }
 
 func getDefaultErrorJson(sts int) string {
