@@ -1,2 +1,2 @@
 # pon
-simple go rest api library
+simple Go rest api library
