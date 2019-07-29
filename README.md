@@ -1,7 +1,7 @@
 # pon
 pon is simple Go Rest API library
 
-## sample
+## Sample
 ```go
 func main() {
 	// make new API
