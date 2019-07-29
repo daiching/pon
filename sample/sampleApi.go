@@ -1,21 +1,20 @@
 package main
 
 import (
-	"bytes"
-	"encoding/json"
 	"github.com/daiching/pon"
-	"net/htp"
+
+	"net/http"
 )
 
 type Sample struct {
-	Id   int
-	Name string
+	Id   int    `json:"id"`
+	Name string `json:"name"`
 }
 
 func init() {
-	api := pon.NewApi("/sample/")
+	api := pon.NewApi("/sample")
 	setGetSampleAPI(api)
-	setPostSampleAPI(api)
+	setJsonPostSampleAPI(api)
 	api.Map()
 }
 
@@ -27,13 +26,9 @@ func setGetSampleAPI(api *pon.Api) error {
 	return nil
 }
 
-func setPostSampleAPI(api *pon.Api) error {
-	api.SetPost(func(w http.ResponseWriter, r *http.Request) (interface{}, int) {
-		buf := new(bytes.Buffer)
-		buf.ReadFrom(r.Body)
-		s := Sample{}
-		json.Unmarshal(buf.Bytes(), &s)
-		return s, pon.StatusOK
+func setJsonPostSampleAPI(api *pon.Api) error {
+	api.SetJsonPost(func(w http.ResponseWriter, r *http.Request) (string, int) {
+		return `{"id":2,"name":"POST"}`, pon.StatusOK
 	})
 	return nil
 }
