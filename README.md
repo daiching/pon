@@ -19,7 +19,9 @@ func main() {
 		// return status code and interface{}
 		return s, pon.StatusOK
 	})
-
+	
+	//mapping
+	api.Map()
 	// start api
 	pon.Start("8080")
 }
